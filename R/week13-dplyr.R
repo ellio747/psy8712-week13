@@ -39,17 +39,37 @@ week13_tbl <- testscores_tbl %>% # this retains an individual with a test score 
   ) %>% 
   write_csv("../out/week13.csv")
 
-
-#Visualization
-
 #Analysis
+# Display the total number of managers
+week13_tbl %>% 
+  count() %>% 
+  View()# n = 549 managers
 
-#Publication
+# Display the total number of unique managers
+week13_tbl %>% 
+  distinct(employee_id) %>% 
+  count()%>% 
+  View()# n = 549 managers
 
+# Display summary of the number of managers split by location (only not original manager hires)
+week13_tbl %>% 
+  group_by(city) %>% 
+  filter(manager_hire == "N") %>% 
+  count()%>% 
+  View() # Chicago = 61, Houston = 20, New York = 183, Orlando = 20, San Francisco = 48, Toronto = 189
 
+# Display mean, SD of years of employment, split by performance level
+week13_tbl %>% 
+  group_by(performance_group) %>% 
+  summarise(
+    m = mean(yrs_employed),
+    sd = sd(yrs_employed)
+  )%>% 
+  View() # Bottom = 4.74 (.537), Middle = 4.58 (.509), Top = 4.33 (.604)
 
-dbExecute(con, "SELECT * FROM participant_scores") # This will return a 0 # returns a result
-
-# Only using #dbGetQuery
-
-# this will do the tables
+# Display location classification, ID number, test score, in alphabetical order by location type, test score descending
+week13_tbl %>% 
+  select(office_type, employee_id, test_score) %>% 
+  arrange(office_type) %>% 
+  arrange(desc(test_score)) %>% 
+  View()
