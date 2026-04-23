@@ -70,6 +70,5 @@ week13_tbl %>%
 # Display location classification, ID number, test score, in alphabetical order by location type, test score descending
 week13_tbl %>% 
   select(office_type, employee_id, test_score) %>% 
-  arrange(office_type) %>% 
-  arrange(desc(test_score)) %>% 
+  arrange(office_type, desc(test_score)) %>% 
   View()
