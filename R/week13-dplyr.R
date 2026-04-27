@@ -28,12 +28,12 @@ offices_tbl <- dbGetQuery(con, "SELECT * FROM datascience_offices") %>%
   write_csv("../data/offices.csv") # write to csv in data as per instructions
 
 # Combine data such that employees without test scores are removed
-week13_tbl <- testscores_tbl %>% # this retains an individual with a test score = 0, but not NULL, so retained
-  left_join( # anchors on testscores_tbl, pulling in employee details; 22 employees without test scores are dropped
-    employees_tbl, # employee data
+week13_tbl <- employees_tbl %>% # this retains an individual with a test score = 0, but not NULL, so retained
+  inner_join( # anchors on employee_tbl, pulling in employee with test scores; 22 employees without test scores are dropped
+    testscores_tbl, # employee data
     by = "employee_id" # linking key of employee_id in both tables
   ) %>% 
-  left_join( # adds on office type by the city location of the management office
+  inner_join( # adds on office type by the city location of the management office
     offices_tbl,
     by = join_by("city" == "office")
   ) %>% 
