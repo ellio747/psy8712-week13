@@ -69,7 +69,7 @@ week13_tbl %>% # for this call, I grouped these by performance, without includin
     m = round(mean(yrs_employed), 2), # summarize means; rounded 2 decimal for cleaner output
     sd = round(sd(yrs_employed), 2) # summarize sds; rounded 2 decimal for cleaner output
   )%>% 
-  View() # Bottom = 4.74 (.537), Middle = 4.58 (.509), Top = 4.33 (.604)
+  View() # Bottom = 4.74 (.54), Middle = 4.58 (.51), Top = 4.33 (.60)
 
 # Display location classification, ID number, test score, in alphabetical order by location type, test score descending
 week13_tbl %>% 
